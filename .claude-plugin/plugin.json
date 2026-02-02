@@ -1,0 +1,10 @@
+{
+  "name": "arch",
+  "description": "Progressive decomposition architecture workflow with adversarial design review for maintaining modular codebases",
+  "version": "1.0.0",
+  "author": {
+    "name": "claude-code-architect"
+  },
+  "repository": "https://github.com/garrettgoff/claude-code-architect",
+  "keywords": ["architecture", "design", "modular", "documentation", "workflow"]
+}
