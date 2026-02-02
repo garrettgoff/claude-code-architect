@@ -60,11 +60,33 @@ The user wants: "$ARGUMENTS"
 - Maintain consistency between parent and child docs
 - Verify timestamps are updated
 
+**If creating new components:**
+1. Create the component directory: `mkdir -p ./path/to/component`
+2. Create `./path/to/component/ARCHITECTURE.md` with proper frontmatter:
+   ```yaml
+   ---
+   managed-by: arch-plugin
+   schema-version: 1.0.0
+   doc-version: 1.0.0
+   last-updated: [DATE]
+   ---
+   ```
+3. Populate Purpose, External Interfaces, Internal Architecture sections
+4. Add parent reference at bottom
+5. Update parent's ARCHITECTURE.md to list the new subcomponent
+6. Verify bidirectional references are correct
+
 ### Phase 8: Implementation
 - Implement the code changes
 - Stay within documented component boundaries
 - Follow the interfaces specified in ARCHITECTURE.md
 - Reference the design proposal during implementation
+
+**For new components:**
+- Create code files inside the component directory
+- Ensure exports match the "Provides" section in ARCHITECTURE.md
+- Ensure imports match the "Requires" section in ARCHITECTURE.md
+- If adding subcomponents within the new component, create nested ARCHITECTURE.md files as needed
 
 ### Phase 9: Verification
 - Use architecture-query skill to verify implementation

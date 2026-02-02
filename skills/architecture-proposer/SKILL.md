@@ -82,6 +82,14 @@ Create a structured proposal:
 - Purpose: ...
 - External Ports: ...
 - Internal Architecture: ...
+- Parent component: [which ARCHITECTURE.md will reference this]
+
+### Component Directory Creation Checklist
+For each new component proposed:
+- [ ] Create directory: `mkdir -p ./path/to/component`
+- [ ] Create ARCHITECTURE.md in that directory with proper frontmatter
+- [ ] Update parent's ARCHITECTURE.md to list new subcomponent
+- [ ] Verify bidirectional references (parent → child, child → parent)
 
 ## ARCHITECTURE.md Updates Required
 - `/ARCHITECTURE.md`: Add ComponentName to subcomponents
@@ -126,6 +134,40 @@ If encountering a class cluster that should be promoted:
 - Flag: "This appears to be a logical component without formal documentation"
 - Propose creating ARCHITECTURE.md for it
 - Migrate relevant docstring content as starting point
+
+### When to Create a New Component Directory
+
+**CREATE a new component directory when:**
+- New functionality has a distinct, cohesive purpose separate from existing components
+- The feature will have multiple files (>2-3 related files)
+- It represents a logical boundary (auth, api, database, payments, etc.)
+- It will be reused by multiple other components
+- It needs its own clear external interface
+
+**DO NOT create a new component directory when:**
+- It's a single utility file (add to parent's Internal Architecture instead)
+- It's a helper class for an existing component
+- It duplicates or overlaps significantly with existing components
+- The functionality is temporary or experimental (document in notes instead)
+
+**New Component Creation Steps:**
+1. Propose the component with clear purpose and interfaces
+2. Get approval in the design proposal phase
+3. During implementation:
+   - Create the directory: `mkdir -p ./path/to/component`
+   - Create `./path/to/component/ARCHITECTURE.md` with:
+     ```yaml
+     ---
+     managed-by: arch-plugin
+     schema-version: 1.0.0
+     doc-version: 1.0.0
+     last-updated: [DATE]
+     ---
+     ```
+   - Add Purpose, External Interfaces, Internal Architecture sections
+   - Add parent reference at bottom: `*Parent: ../ParentComponent*`
+   - Update parent's ARCHITECTURE.md to list new subcomponent
+   - Implement the code files
 
 ## Output
 - Design proposal document

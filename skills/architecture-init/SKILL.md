@@ -92,9 +92,32 @@ For approved components, create `[component-path]/ARCHITECTURE.md`:
 - Check that external interfaces align between levels
 
 ## Output
-- Root ARCHITECTURE.md created/updated
-- Component ARCHITECTURE.md files for selected components
-- Summary report of what was created
+
+**CRITICAL: This process creates MULTIPLE ARCHITECTURE.md files, not just one.**
+
+Expected file structure:
+```
+project/
+├── ARCHITECTURE.md              # Root - always created
+├── auth/
+│   └── ARCHITECTURE.md          # Component doc
+├── api/
+│   └── ARCHITECTURE.md          # Component doc
+└── database/
+    └── ARCHITECTURE.md          # Component doc
+```
+
+**Deliverables:**
+- Root `./ARCHITECTURE.md` created/updated
+- Component `./[path]/ARCHITECTURE.md` files for EACH selected component
+- Summary report listing ALL files created:
+  ```
+  Created ARCHITECTURE.md files:
+    ✓ ./ARCHITECTURE.md (root)
+    ✓ ./auth/ARCHITECTURE.md
+    ✓ ./api/ARCHITECTURE.md
+  Total: 3 architecture files created
+  ```
 - Suggestions for areas needing human review
 
 ## Notes

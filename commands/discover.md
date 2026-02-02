@@ -32,7 +32,21 @@ Show the user:
 Ask: "Should I proceed with generating ARCHITECTURE.md files for these components?"
 
 ### 4. Generate Documentation
-For approved components, create ARCHITECTURE.md files with this exact frontmatter:
+
+**CRITICAL: Create a MODULAR file structure with MULTIPLE ARCHITECTURE.md files.**
+
+Create one ARCHITECTURE.md file in EACH component directory:
+```
+./ARCHITECTURE.md                    # Root - always create
+./src/auth/ARCHITECTURE.md           # Each component gets its own file
+./src/auth/session/ARCHITECTURE.md   # Subcomponents too (if warranted)
+./src/api/ARCHITECTURE.md
+./src/database/ARCHITECTURE.md
+```
+
+**Do NOT create a single monolithic file. The progressive decomposition pattern requires separate files per component.**
+
+Each file must have this exact frontmatter:
 ```yaml
 ---
 managed-by: arch-plugin
@@ -41,9 +55,11 @@ doc-version: 1.0.0
 last-updated: [TODAY'S DATE]
 ---
 ```
+
 Also:
 - Flag uncertain sections with notes
 - Optionally add `stability: stable|experimental` based on analysis
+- Ensure parent references point to the correct parent ARCHITECTURE.md
 
 ### 5. Generate Discovery Report
 Create a summary report showing:
@@ -98,6 +114,16 @@ If arguments provided, focus discovery on those paths. Otherwise, start from rep
 At completion, provide:
 1. Summary of components discovered
 2. Confidence levels
-3. List of generated ARCHITECTURE.md files
+3. **List of ALL generated ARCHITECTURE.md files with their paths:**
+   ```
+   Created ARCHITECTURE.md files:
+     ✓ ./ARCHITECTURE.md (root)
+     ✓ ./src/auth/ARCHITECTURE.md
+     ✓ ./src/api/ARCHITECTURE.md
+     ✓ ./src/database/ARCHITECTURE.md
+   Total: 4 architecture files created
+   ```
 4. Detected issues and recommendations
 5. Next steps for refinement
+
+**Verification**: If only one ARCHITECTURE.md was created, the discovery was incomplete. Go back and create files for each component directory.

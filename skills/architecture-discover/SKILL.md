@@ -88,7 +88,33 @@ For each identified component:
 
 ### Phase 4: Documentation Generation
 
+**CRITICAL: Create a MODULAR file structure, NOT a single file.**
+
 **1. Generate ARCHITECTURE.md Files**
+
+You MUST create an ARCHITECTURE.md file IN EACH component's directory:
+
+```
+project/
+├── ARCHITECTURE.md              # Root - describes top-level structure
+├── auth/
+│   ├── ARCHITECTURE.md          # Auth component - its purpose & subcomponents
+│   ├── session/
+│   │   └── ARCHITECTURE.md      # Session subcomponent (if complex enough)
+│   └── tokens.ts                # Single-file (described in auth/ARCHITECTURE.md)
+├── api/
+│   └── ARCHITECTURE.md          # API component
+└── database/
+    └── ARCHITECTURE.md          # Database component
+```
+
+**Rules for file creation:**
+- **Root ARCHITECTURE.md**: Always create at repository root
+- **Component directories**: Create ARCHITECTURE.md in each directory that represents a logical component (auth/, api/, services/, etc.)
+- **Subcomponent directories**: Create nested ARCHITECTURE.md files when subdirectories have their own cohesive purpose
+- **Single-file implementations**: Do NOT create ARCHITECTURE.md for these; describe them in the parent's doc
+- **Depth limit**: Generally stop at 3 levels unless the codebase clearly warrants deeper nesting
+
 For each component:
 ```markdown
 ---
@@ -225,8 +251,27 @@ Mark sections that need human review:
 
 ## Output
 
-**Generated Files:**
-- ARCHITECTURE.md at each component level
+**Generated Files (MUST be multiple files):**
+- `./ARCHITECTURE.md` - Root level, always created
+- `./componentA/ARCHITECTURE.md` - One per identified component directory
+- `./componentA/subcomponent/ARCHITECTURE.md` - Nested as needed for subcomponents
+- Discovery report summarizing all files created
+
+**Example output for a typical project:**
+```
+Created ARCHITECTURE.md files:
+  ✓ ./ARCHITECTURE.md (root)
+  ✓ ./src/auth/ARCHITECTURE.md
+  ✓ ./src/auth/session/ARCHITECTURE.md
+  ✓ ./src/api/ARCHITECTURE.md
+  ✓ ./src/database/ARCHITECTURE.md
+  ✓ ./src/utils/ARCHITECTURE.md
+Total: 6 architecture files created
+```
+
+**If you only create ONE file, you have done this incorrectly.** The modular structure is essential for maintainability.
+
+**Additional output:**
 - Discovery report summarizing findings
 - List of issues/uncertainties for review
 
