@@ -1,0 +1,16 @@
+{
+  "name": "architect-plugins",
+  "owner": {
+    "name": "Garrett Goff"
+  },
+  "metadata": {
+    "description": "Architecture planning plugins for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "claude-code-architect",
+      "source": "./",
+      "description": "Transform Claude Code into an architecture-first development assistant"
+    }
+  ]
+}

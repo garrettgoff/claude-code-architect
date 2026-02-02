@@ -12,31 +12,39 @@ This plugin helps you maintain clean, modular architecture in your codebase thro
 
 ## Installation
 
-### From Local Directory (Development)
+### Option 1: Via Marketplace Command (Recommended)
 
 ```bash
-claude --plugin-dir /path/to/claude-code-architect
+/plugin marketplace add garrettgoff/claude-code-architect
+/plugin install claude-code-architect@architect-plugins
 ```
 
-### From Git Repository
+### Option 2: Via Settings File
 
-Add to your project's `.claude/settings.json` or global settings:
+Add to your project's `.claude/settings.json` or global `~/.claude/settings.json`:
 
 ```json
 {
-  "plugins": [
-    {
-      "type": "git",
-      "url": "https://github.com/garrettgoff/claude-code-architect.git"
+  "extraKnownMarketplaces": {
+    "architect-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "garrettgoff/claude-code-architect"
+      }
     }
-  ]
+  },
+  "enabledPlugins": {
+    "claude-code-architect@architect-plugins": true
+  }
 }
 ```
 
-Or install via command:
+Then restart Claude Code to load the plugin.
+
+### Option 3: Local Development
 
 ```bash
-/plugin install git:https://github.com/garrettgoff/claude-code-architect.git
+claude --plugin-dir /path/to/claude-code-architect
 ```
 
 ## Commands
@@ -206,7 +214,8 @@ Make changes to skills or commands, then restart Claude Code to pick up updates.
 ```
 claude-code-architect/
 ├── .claude-plugin/
-│   └── plugin.json              # Plugin manifest
+│   ├── plugin.json              # Plugin manifest
+│   └── marketplace.json         # Marketplace catalog
 ├── commands/                     # User-invoked commands
 │   ├── discover.md
 │   ├── init.md
