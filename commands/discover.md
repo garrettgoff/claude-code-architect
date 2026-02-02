@@ -32,12 +32,18 @@ Show the user:
 Ask: "Should I proceed with generating ARCHITECTURE.md files for these components?"
 
 ### 4. Generate Documentation
-For approved components:
-- Create ARCHITECTURE.md files using the schema
-- Include frontmatter with `managed-by: arch-plugin`
-- Set `doc-version: 1.0.0` (initial version)
+For approved components, create ARCHITECTURE.md files with this exact frontmatter:
+```yaml
+---
+managed-by: arch-plugin
+schema-version: 1.0.0
+doc-version: 1.0.0
+last-updated: [TODAY'S DATE]
+---
+```
+Also:
 - Flag uncertain sections with notes
-- Mark stability based on analysis
+- Optionally add `stability: stable|experimental` based on analysis
 
 ### 5. Generate Discovery Report
 Create a summary report showing:
